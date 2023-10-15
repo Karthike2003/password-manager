@@ -7,13 +7,23 @@ const PORT = 3001;
 app.use(cors);
 app.use(express.json);
 
-
 const db = mysql.createConnection({
-  host: 'localhost',     // Replace with your MySQL host
-  user: 'root',     // Replace with your MySQL username
-  password: 'karthik@2003', // Replace with your MySQL password
-  database: 'password-manager', // Replace with your MySQL database name
-});
+    host: 'localhost',
+    user: 'root',
+    password: 'karthik@2003',
+    database: 'password-manager',
+  });
+  
+  db.connect((err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err);
+      return;
+    }
+    console.log('Successfully connected to the database');
+  });
+  
+  // Now you can use the "db" connection object for your queries
+  
 
 app.post("/addpassword",(req,res)=>{
      const {password,title} = req.body
